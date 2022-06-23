@@ -6,7 +6,7 @@ import (
 	"github.com/pterm/pterm"
 )
 
-func GetDefaultTextInput(query string) string {
+func AskText(query string) string {
 	printer := &pterm.InteractiveTextInputPrinter{
 		DefaultText: query,
 		TextStyle:   &pterm.ThemeDefault.PrimaryStyle,

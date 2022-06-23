@@ -1,0 +1,16 @@
+[
+  {
+    "id": 217,
+    "name": "Contains Duplicate",
+    "unique_name": "contains-duplicate",
+    "description": "Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.",
+    "difficulty": 1
+  },
+  {
+    "id": 242,
+    "name": "Valid Anagram",
+    "unique_name": "valid-anagram",
+    "description": "Given two strings s and t, return true if t is an anagram of s, and false otherwise. An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.",
+    "difficulty": 1
+  }
+]
