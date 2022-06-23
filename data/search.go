@@ -3,7 +3,6 @@ package data
 import (
 	h "algo-cli/helpers"
 	t "algo-cli/types"
-	"fmt"
 	"path/filepath"
 	"runtime"
 )
@@ -28,11 +27,8 @@ func Search(query string) []t.Question {
 		})
 	}
 
-	fmt.Println("Results: ", results)
-
 	sortedResults:= h.ReverseResults(h.QuickSortResults(results, 0, len(results) -1))
 
-	fmt.Println("Sorted Results: ", sortedResults)
 	sortedQuestions := make([]t.Question, 0)
 	for _, r := range(sortedResults) {
 		sortedQuestions = append(sortedQuestions, r.Question)

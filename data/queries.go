@@ -19,7 +19,5 @@ func GetQuestions(path string) []t.Question {
 		log.Fatal("Error during Unmarshal(): ", err)
 	}
 
-	log.Println("Questions: ", questions)
-
 	return questions
 }
