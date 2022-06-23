@@ -6,7 +6,7 @@ import (
 
 // * Using modified Ratcliff-Obershelp similarity function
 func CompareStrings(s string, t string) int {
-	if len(s) == 1 || len(t) == 1 {
+	if len(s) <= 1 || len(t) <= 1 {
 		return 0
 	}
 
@@ -17,8 +17,8 @@ func CompareStrings(s string, t string) int {
 	sLeft := string(s[:sIdx])
 	tLeft := string(t[:tIdx])
 
-	sRight := string(s[sIdx+(len(maxSub)-1):])
-	tRight := string(t[tIdx+(len(maxSub)-1):])
+	sRight := string(s[sIdx+(len(maxSub)):])
+	tRight := string(t[tIdx+(len(maxSub)):])
 
 	return len(maxSub) + CompareStrings(sLeft, tLeft) + CompareStrings(sRight, tRight)
 }
