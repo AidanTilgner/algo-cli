@@ -1,44 +1,91 @@
 package helpers
 
 import (
+	"fmt"
 	"strings"
 )
 
-// * Using modified Ratcliff-Obershelp similarity function
-func CompareStrings(s string, t string) int {
-	if len(s) <= 1 || len(t) <= 1 {
+func CompareTwoStrings(stringOne, stringTwo string) float32 {
+	removeSpaces(&stringOne, &stringTwo)
+
+	if value := returnEarlyIfPossible(stringOne, stringTwo); value >= 0 {
+		return value
+	}
+
+	firstBigrams := make(map[string]int)
+	for i := 0; i < len(stringOne)-1; i++ {
+		a := fmt.Sprintf("%c", stringOne[i])
+		b := fmt.Sprintf("%c", stringOne[i+1])
+
+		bigram := a + b
+
+		var count int
+
+		if value, ok := firstBigrams[bigram]; ok {
+			count = value + 1
+		} else {
+			count = 1
+		}
+
+		firstBigrams[bigram] = count
+	}
+
+	var intersectionSize float32
+	intersectionSize = 0
+
+	for i := 0; i < len(stringTwo)-1; i++ {
+		a := fmt.Sprintf("%c", stringTwo[i])
+		b := fmt.Sprintf("%c", stringTwo[i+1])
+
+		bigram := a + b
+
+		var count int
+
+		if value, ok := firstBigrams[bigram]; ok {
+			count = value
+		} else {
+			count = 0
+		}
+
+		if count > 0 {
+			firstBigrams[bigram] = count - 1
+			intersectionSize = intersectionSize + 1
+		}
+	}
+
+	return (2.0 * intersectionSize) / (float32(len(stringOne)) + float32(len(stringTwo)) - 2)
+}
+
+func removeSpaces(stringOne, stringTwo *string) {
+	*stringOne = strings.Replace(*stringOne, " ", "", -1)
+	*stringTwo = strings.Replace(*stringTwo, " ", "", -1)
+}
+
+func returnEarlyIfPossible(stringOne, stringTwo string) float32 {
+	// if both are empty strings
+	if len(stringOne) == 0 && len(stringTwo) == 0 {
+		return 1
+	}
+
+	// if only one is empty string
+	if len(stringOne) == 0 || len(stringTwo) == 0 {
 		return 0
 	}
 
-	maxSub := string(getMaxLengthCommonString(s, t))
-	sIdx := strings.Index(s, maxSub)
-	tIdx := strings.Index(t, maxSub)
-
-	sLeft := string(s[:sIdx])
-	tLeft := string(t[:tIdx])
-
-	sRight := string(s[sIdx+(len(maxSub)):])
-	tRight := string(t[tIdx+(len(maxSub)):])
-
-	return len(maxSub) + CompareStrings(sLeft, tLeft) + CompareStrings(sRight, tRight)
-}
-
-func getMaxLengthCommonString(str1, str2 string) string {
-	answer := ""
-
-	len1, len2 := len(str1), len(str2)
-
-	for i := 0; i < len1; i++ {
-		match := ""
-		for j := 0; i < len2; i++ {
-			if i+j < len1 && str1[i+j] == str2[j] {
-				match += string(str2[j])
-			} else {
-				if len(match) > len(answer) {
-					answer = match
-				}
-			}
-		}
+	// identical
+	if stringOne == stringTwo {
+		return 1
 	}
-	return answer
+
+	// both are 1-letter strings
+	if len(stringOne) == 1 && len(stringTwo) == 1 {
+		return 0
+	}
+
+	// if either is a 1-letter string
+	if len(stringOne) < 2 || len(stringTwo) < 2 {
+		return 0
+	}
+
+	return -1
 }

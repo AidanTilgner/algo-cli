@@ -49,3 +49,11 @@ func QuickSortResults(results []t.Result, low int, high int) []t.Result {
 	}
 	return results
 }
+
+func ReverseResults(results []t.Result) []t.Result {
+	for i := 0; i < len(results)/2; i++ {
+		j := len(results) - i - 1
+		results[i], results[j] = results[j], results[i]
+	}
+	return results
+}
