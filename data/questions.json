@@ -4,13 +4,48 @@
     "name": "Contains Duplicate",
     "unique_name": "contains-duplicate",
     "description": "Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.",
-    "difficulty": 1
+    "difficulty": 1,
+    "examples": [
+      {"input": "[1,2,3,1]", "output": "true"}
+    ]
   },
   {
     "id": 242,
     "name": "Valid Anagram",
     "unique_name": "valid-anagram",
     "description": "Given two strings s and t, return true if t is an anagram of s, and false otherwise. An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.",
-    "difficulty": 1
+    "difficulty": 1,
+    "examples": [
+      {
+        "input": "s = 'anagram', t = 'nagaram'",
+        "output": "true"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Two Sum",
+    "unique_name": "two-sum",
+    "description": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nYou can return the answer in any order.",
+    "difficulty": 1,
+    "examples": [
+      {
+        "input": "nums = [2,7,11,15], target = 9",
+        "output": "[0, 1]"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Group Anagrams",
+    "unique_name": "group-anagram",
+    "description": "Given an array of strings strs, group the anagrams together. You can return the answer in any order. An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.",
+    "difficulty": 1,
+    "examples": [
+      {
+        "input": "strs = ['eat','tea','tan','ate','nat','bat']",
+        "output": "[['bat'],['nat','tan'],['ate','eat','tea']]"
+      }
+    ]
   }
 ]
